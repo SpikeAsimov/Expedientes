@@ -4,35 +4,27 @@ function imprimirOrden() {
 
     console.log(cantidad, nroOrden);
 
+    window.open('backend/ordenPdf.php?nroOrden='+nroOrden+'&'+'cantidad='+cantidad,'name','width=1200,height=800');
 
 }
 
 function crearOrden() {
     var cantidad = $('#cantidadOrdenes').val();
-    var nroOrden= $('#ultimoNro').val();
 
-    console.log(cantidad, nroOrden);
-    //$('#btnOrden').hide();
-    $('#btnImprimir').toggle(300);
+    console.log(cantidad);
 
-    $('#formOrdenes').form('submit', {
-        url: 'backend/cargarOrden.php?nroOrden='+$('#ultimoNro').val()+'&'+'cantidad'+$('#cantidadOrdenes').val(),
-        onsubmit: function (){
-            return $(this).form('validate');
+    $.ajax({
+        url: 'backend/cargarOrden.php',
+        type: "POST",
+        data: {
+            cantidad: cantidad
         },
-        success: function (result){
-            var result = eval('('+result+')');
+        success: function (dataResult){
+            alert(dataResult);
 
-            if (result.errorMsg){
-                $.messager.show({
-                    title: 'Error',
-                    msg: result.errorMsg
-                });
-        } else {
-                ultimoNumero();
-            }
         }
-    })
+    });
+
 }
 
 function ultimoNumero() {
@@ -49,7 +41,9 @@ function ultimoNumero() {
 
 $(function () {
 
-    $('#btnImprimir').hide();
+
+
+    //$('#btnImprimir').hide();
     ultimoNumero();
 
     //Boton Expedientes
@@ -137,9 +131,3 @@ $(function () {
         $(this).addClass('active');
     });
 });
-
-
-
-function consultarNumero () {
-
-}

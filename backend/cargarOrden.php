@@ -3,10 +3,20 @@
 @include('conexion.php');
 
 @$cantidad = $_POST['cantidad'];
-@$Numero = $_POST['nroOrden'];
 
+//UltimoNro
+$SQL_ultimo = "SELECT max(numero) + 1 as ultimo FROM ordenprovision";
+$respuesta = $conexion->query($SQL_ultimo);
+$row = $respuesta->fetch_assoc();
+$resultado = $row['ultimo'];
+@$Numero = $resultado;
+
+
+
+
+
+//Crear orden
 for ($i = 1; $i < $cantidad; $i++){
-
 
     $SQL = "INSERT INTO `ordenprovision`(`numero`) VALUES ('$Numero')";
 
@@ -17,7 +27,7 @@ for ($i = 1; $i < $cantidad; $i++){
 }
 
 
-$datosJson = '[{"valido":"validate"}]';
+$datosJson = "todo OK";
 
 
 echo $datosJson;

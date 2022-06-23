@@ -138,14 +138,14 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic">Último N°</span>
                         </div>
-                        <input type="text" class="form-control" id="ultimoNro" aria-describedby="basic" disabled>
+                        <input type="text" class="form-control" id="ultimoNro" name="nroOrden" aria-describedby="basic" disabled>
                     </div>
                     <div class="form-inline col-12">
                         <div class="form-group mb-2 p-4">
                             <label for="ordenes" class="col-form-label">Cantidad de órdenes</label>
                         </div>
                         <div class="form-group mb-2 p-4">
-                            <input type="number" class="form-control" id="cantidadOrdenes" value="1">
+                            <input type="number" class="form-control" id="cantidadOrdenes" name="cantidad" value="1">
                         </div>
 
                         <div class="form-group mb-2 p-4">
