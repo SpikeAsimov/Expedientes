@@ -2,7 +2,7 @@
 <?php
 @include('conexion.php');
 
-@$cantidad = $_POST['cantidad'];
+$cantidad = $_POST['cantidad'];
 
 //UltimoNro
 $SQL_ultimo = "SELECT max(numero) + 1 as ultimo FROM ordenprovision";
@@ -19,7 +19,6 @@ $resultado = $row['ultimo'];
 for ($i = 1; $i < $cantidad; $i++){
 
     $SQL = "INSERT INTO `ordenprovision`(`numero`) VALUES ('$Numero')";
-
     $conexion->query($SQL) or die ("Error en $SQL ".mysqli_error());
 
     $Numero ++;

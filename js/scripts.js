@@ -10,6 +10,7 @@ function imprimirOrden() {
 
 function crearOrden() {
     var cantidad = $('#cantidadOrdenes').val();
+    var nroOrden= $('#ultimoNro').val();
 
     console.log(cantidad);
 
@@ -17,11 +18,11 @@ function crearOrden() {
         url: 'backend/cargarOrden.php',
         type: "POST",
         data: {
-            cantidad: cantidad
+            cantidad: cantidad,
+            nroOrden: nroOrden
         },
-        success: function (dataResult){
-            alert(dataResult);
-
+        success: function (res){
+            alert(res);
         }
     });
 

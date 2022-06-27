@@ -20,7 +20,40 @@ class PDF extends FPDF {
     function Header()
     {
         //Logo
+        $tipoLetra = 'Helvetica';
+
         $this->Image('../img/SEC.jpg', 12, 3, -300);
+
+        //NroOrden y Fecha
+        $this->SetFont($tipoLetra, 'B', 14);
+
+        $posicionEnY = 35;
+
+        $this->SetY($posicionEnY+3);
+        $this->SetX(155);
+        $this->Cell(1, 5, "Nro: 000-00001", 0 , 'C');
+
+
+        $this->SetFont($tipoLetra, 'B', 14);
+        $this->SetY($posicionEnY+15);
+        $this->SetX(120);
+        $this->Cell(1, 5, "FECHA: ______/______/______", 0 , 'C');
+
+
+        $this->SetFont($tipoLetra, 'BU', 15);
+        $this->SetY($posicionEnY+33);
+        $this->SetX(80);
+        $this->Cell(1, 5, "ORDEN DE PROVISION", 0, 'C');
+
+
+
+        $this->SetFont($tipoLetra, 'B', 14);
+        $this->SetY($posicionEnY+55);
+        $this->SetX(35);
+        $this->Cell(1, 5, "COMERCIO: ", 0, 'C');
+
+        $this->SetDrawColor(0,0,0);
+        $this->Line(65,$posicionEnY+60,180,$posicionEnY+60);
 
     }
 
@@ -28,6 +61,7 @@ class PDF extends FPDF {
     function BasicTable($header, $datos)
     {
         $tablaPosicionY = 110;
+        $tipoLetra = 'Helvetica';
 
         // Cabecera
         $this->SetY($tablaPosicionY);
@@ -57,6 +91,18 @@ class PDF extends FPDF {
 
         }
 
+        $posicionEnY = 35;
+
+        $this->SetY($posicionEnY+220);
+        $this->SetFont($tipoLetra, 'B', 14);
+        $this->SetX(50);
+        $this->Cell(1, 5, "FIRMA: _________________________", 0, 'C');
+
+        $this->SetY($posicionEnY+235);
+        $this->SetX(50);
+        $this->Cell(1, 5, "ACLARACION: _________________________", 0, 'C');
+
+
 
 
 
@@ -69,56 +115,17 @@ $header = array ('CANTIDAD', 'ARTICULO');
 $datos = array (' ');
 
 $pdf = new PDF('P', 'mm', 'A4');
-
-$pdf->AliasNbPages();
-$pdf->AddPage();
+$cantidad = 5;
 
 
-//NroOrden y Fecha
-$pdf->SetFont($tipoLetra, 'B', 14);
+for ($i=0; $i<$cantidad; $i++){
 
-$posicionEnY = 35;
-
-$pdf->SetY($posicionEnY+3);
-$pdf->SetX(155);
-$pdf->Cell(1, 5, "Nro: 000-00001", 0 , 'C');
-
-
-$pdf->SetFont($tipoLetra, 'B', 14);
-$pdf->SetY($posicionEnY+15);
-$pdf->SetX(120);
-$pdf->Cell(1, 5, "FECHA: ______/______/______", 0 , 'C');
-
-
-$pdf->SetFont($tipoLetra, 'BU', 15);
-$pdf->SetY($posicionEnY+33);
-$pdf->SetX(80);
-$pdf->Cell(1, 5, "ORDEN DE PROVISION", 0, 'C');
-
-
-
-$pdf->SetFont($tipoLetra, 'B', 14);
-$pdf->SetY($posicionEnY+55);
-$pdf->SetX(35);
-$pdf->Cell(1, 5, "COMERCIO: ", 0, 'C');
-
-$pdf->SetDrawColor(0,0,0);
-$pdf->Line(65,$posicionEnY+60,180,$posicionEnY+60);
-
+    $pdf->AddPage();
 
 
 //Tabla
-$pdf->BasicTable($header, $datos);
-
-
-$pdf->SetY($posicionEnY+220);
-$pdf->SetFont($tipoLetra, 'B', 14);
-$pdf->SetX(50);
-$pdf->Cell(1, 5, "FIRMA: _________________________", 0, 'C');
-
-$pdf->SetY($posicionEnY+235);
-$pdf->SetX(50);
-$pdf->Cell(1, 5, "ACLARACION: _________________________", 0, 'C');
+    $pdf->BasicTable($header, $datos);
+}
 
 $pdf->output();
 
